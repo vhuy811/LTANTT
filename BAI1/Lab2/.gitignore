@@ -1,0 +1,8 @@
+# Log do GitSecure sinh ra
+gitsecure.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

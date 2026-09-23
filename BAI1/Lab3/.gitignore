@@ -1,0 +1,10 @@
+# Log & chữ ký do SecureLogger sinh ra
+secure.log
+secure.log.*
+*.gz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
