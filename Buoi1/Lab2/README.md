@@ -85,7 +85,19 @@ Log được ghi vào `gitsecure.log`:
 [2026-09-23 ...] Sensitive info found in pre-commit-hook-test/bad.py: pattern password...
 ```
 
-## 6. Ghi chú kỹ thuật
+## 6. Bằng chứng chạy thực tế
+
+Sau khi `git init` + `git config core.hooksPath .githooks`, thử commit file `bad.py` (chứa `password = "123456"`):
+
+![Commit bị GitSecure chặn](images/01_commit_blocked.png)
+
+Hook đã **chặn commit** (`COMMIT BLOCKED by GitSecure`) với 2 phát hiện:
+- `Sensitive info found in pre-commit-hook-test/bad.py: pattern password...`
+- `File pre-commit-hook-test/bad.py is world-writable!`
+
+→ Đúng mục tiêu: mã có rủi ro bảo mật không lọt được vào repo.
+
+## 7. Ghi chú kỹ thuật
 
 - **Windows:** `check_permissions` dùng đúng bản chính của giáo trình (trang 23). Trên Windows,
   `stat.S_IWOTH` gần như không bao giờ bật nên hàm trả `None` — chạy bình thường, không lỗi.

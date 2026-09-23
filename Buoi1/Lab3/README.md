@@ -42,12 +42,10 @@ pip install -r requirements.txt
 python app.py                 # http://127.0.0.1:5000
 ```
 
-Gửi request thử bằng `curl` (hoặc Postman):
+Gửi request thử — payload để sẵn trong `body.json` (dùng `-d @body.json` để tránh lỗi ký tự `<>` trên Windows CMD):
 
 ```bash
-curl -X POST http://127.0.0.1:5000/validate ^
-  -H "Content-Type: application/json" ^
-  -d "{\"email\":\"phuoc@example.com\",\"url\":\"https://secure.com\",\"filename\":\"report.pdf\",\"sql\":\"' OR 1=1 --\",\"html\":\"<script>alert(1)</script>\"}"
+curl -X POST http://127.0.0.1:5000/validate -H "Content-Type: application/json" -d @body.json
 ```
 
 ## 5. Kết quả kiểm chứng
@@ -72,7 +70,17 @@ curl -X POST http://127.0.0.1:5000/validate ^
 d5561ccc499408bd7bae7c9c120c6f1890fcb3eff6ec6ac4ed4504a79b8accf1
 ```
 
-## 6. Cách hoạt động (tóm tắt luồng)
+## 6. Bằng chứng chạy thực tế
+
+Gửi `POST /validate` (dùng `curl -d @body.json`) rồi xem `secure.log`:
+
+![Response và secure.log](images/01_response_va_log.png)
+
+Nhận xét:
+- **Response**: `email/url/filename: true`, `sql: "1=1"` (đã lọc), `html: "&lt;script&gt;alert(1)&lt;/script&gt;"` (đã escape).
+- **secure.log**: ghi JSON, trường `email` trong `data` đã bị che thành `<email_masked>` → **mask PII hoạt động đúng**. Chữ ký băm được lưu song song trong `secure.log.sig`.
+
+## 7. Cách hoạt động (tóm tắt luồng)
 
 1. `app.py` nhận POST `/validate`, gọi các hàm của SecureValidator.
 2. Gọi `secure_logger.info(..., extra={"data":..., "results":...})`.
@@ -80,7 +88,7 @@ d5561ccc499408bd7bae7c9c120c6f1890fcb3eff6ec6ac4ed4504a79b8accf1
 4. `SecureRotatingFileHandler.emit` ghi log **và** gọi `append_signature` để lưu hash dòng log.
 5. Khi log vượt `MAX_LOG_SIZE`, `GZipRotator` nén file cũ thành `.gz`.
 
-## 7. Ghi chú kỹ thuật
+## 8. Ghi chú kỹ thuật
 
 - `datetime.utcnow()` giữ đúng theo giáo trình. Trên Python 3.12+ có cảnh báo *deprecation*
   (vẫn chạy bình thường). Nếu muốn hết cảnh báo: đổi sang `datetime.now(timezone.utc)`.

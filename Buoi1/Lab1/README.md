@@ -44,7 +44,18 @@ python -m unittest tests/test_validators.py   # chạy unit test
 
 Nhập email / url / filename / SQL / HTML vào form, ứng dụng trả kết quả kiểm tra và chuỗi đã làm sạch.
 
-## 5. Phân tích bảo mật (tóm tắt báo cáo)
+## 5. Bằng chứng chạy thực tế
+
+Gửi form với payload kiểm thử (SQL: `1 || 1=1`, HTML: `<script>alert(1)</script>`):
+
+![Kết quả kiểm tra đầu vào](images/01_ketqua_validate.png)
+
+Nhận xét:
+- **Email / URL / Filename**: hợp lệ.
+- **SQL**: chuỗi `1 || 1=1` sau khi lọc **vẫn là** `1 || 1=1` → bộ lọc blacklist bị **bypass** (payload sống sót nguyên vẹn vì `||` không nằm trong danh sách cấm).
+- **HTML**: `<script>` bị escape thành `&lt;script&gt;alert(1)&lt;/script&gt;` → **chặn XSS đúng như đáp án mẫu** (trang 31 giáo trình). App không có DB nên SQLi chỉ dừng ở mức "vượt bộ lọc", không thực thi.
+
+## 6. Phân tích bảo mật (tóm tắt báo cáo)
 
 Thư viện dùng cách tiếp cận **blacklist/escape đơn giản** nên còn nhiều điểm yếu — chi tiết trong `BaoCao_Audit_secure-validator-lab.md`. Các phát hiện chính:
 
@@ -54,7 +65,7 @@ Thư viện dùng cách tiếp cận **blacklist/escape đơn giản** nên còn
 - **`validate_filename`** bỏ sót null byte, tên thiết bị Windows (`CON`, `NUL`...), ADS.
 - **`validate_email`** regex vừa lọt sai (chấm liên tiếp) vừa từ chối email hợp lệ có `+`.
 
-## 6. Ghi chú
+## 7. Ghi chú
 
 - Source giữ đúng theo bản của giáo trình (đây cũng là đối tượng để phân tích ở báo cáo).
 - Đây là môi trường học tập; các điểm yếu nêu trên là bài học minh hoạ, không dùng cho production.
