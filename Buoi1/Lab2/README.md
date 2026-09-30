@@ -1,7 +1,7 @@
 # GitSecure — Pre-commit Hook Bảo mật
 
 > Bài thực hành 1.4 — Bảo mật trước khi commit
-> Môn: An toàn Web và Cơ sở dữ liệu (UEF)
+> Môn: Lập trình an ninh thông tin (UEF)
 > Sinh viên: **Lê Viết Huy** — MSSV **2387700020** — Lớp **23DATA1**
 
 ## 1. Mục tiêu

@@ -1,7 +1,7 @@
 # SecureLogger — Hệ thống Ghi nhật ký Ưu tiên Bảo mật
 
 > Bài thực hành 1.6 — Ghi nhật ký ưu tiên bảo mật
-> Môn: An toàn Web và Cơ sở dữ liệu (UEF)
+> Môn: Lập trình an ninh thông tin (UEF)
 > Sinh viên: **Lê Viết Huy** — MSSV **2387700020** — Lớp **23DATA1**
 
 ## 1. Mục tiêu

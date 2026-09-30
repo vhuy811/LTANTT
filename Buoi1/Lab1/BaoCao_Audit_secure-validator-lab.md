@@ -1,6 +1,6 @@
 # Báo cáo đánh giá bảo mật — `secure-validator-lab`
 
-**Môn học:** An toàn Web và Cơ sở dữ liệu (UEF)
+**Môn học:** Lập trình an ninh thông tin (UEF)
 **Sinh viên:** Lê Viết Huy — MSSV 2387700020 — Lớp 23DATA1
 **Ngày:** 23/09/2026
 **Đối tượng audit:** Ứng dụng Flask `secure-validator-lab` (thư viện `securevalidator` + `app.py`)

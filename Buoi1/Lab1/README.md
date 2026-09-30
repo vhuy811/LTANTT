@@ -1,7 +1,7 @@
 # SecureValidator — Làm sạch & Kiểm tra Dữ liệu Đầu vào
 
 > Bài 1 — Lab 1: Cơ sở lập trình bảo mật, kiểm tra đầu vào
-> Môn: An toàn Web và Cơ sở dữ liệu (UEF)
+> Môn: Lập trình an ninh thông tin (UEF)
 > Sinh viên: **Lê Viết Huy** — MSSV **2387700020** — Lớp **23DATA1**
 
 ## 1. Mục tiêu
