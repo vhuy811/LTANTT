@@ -5,3 +5,13 @@ venv/
 *.log
 secure.log.*
 *.gz
+
+# Buoi2 - file sinh ra khi chay
+.pytest_cache/
+*.egg-info/
+Buoi2/Lab1/crypto-toolkit/securecrypto/upload/
+Buoi2/Lab1/crypto-toolkit/files/*.enc
+Buoi2/Lab1/crypto-toolkit/files/*.dec
+# Mini CA: khoa rieng + chung chi sinh ra khi chay (khong commit khoa rieng)
+certs/
+*.pem
