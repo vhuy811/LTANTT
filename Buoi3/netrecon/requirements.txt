@@ -1,0 +1,4 @@
+flask
+click
+python-dotenv
+cryptography

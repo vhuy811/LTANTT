@@ -15,3 +15,6 @@ Buoi2/Lab1/crypto-toolkit/files/*.dec
 # Mini CA: khoa rieng + chung chi sinh ra khi chay (khong commit khoa rieng)
 certs/
 *.pem
+
+# Buoi3 - khong commit secret / log / cert
+.env

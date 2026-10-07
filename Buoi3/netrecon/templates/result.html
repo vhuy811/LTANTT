@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+<p><a href="/">&larr; Quét lại</a> &nbsp;|&nbsp; Mục tiêu: <b>{{ target }}</b></p>
+
+{% if result.scan is defined %}
+<h2>Scan Result (cổng mở):</h2>
+<pre>{{ result.scan }}</pre>
+{% endif %}
+
+{% if result.service %}
+<h2>Service Detection:</h2>
+<pre>{{ result.service }}</pre>
+{% endif %}
+
+{% if result.banner %}
+<h2>Banner Grabbing:</h2>
+<ul>
+  {% for port, banner in result.banner.items() %}
+    <li>Port {{ port }}: {{ banner }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if result.map %}
+<h2>Network Map:</h2>
+<pre>{{ result.map }}</pre>
+{% endif %}
+
+{% if result.vuln %}
+<h2>Vulnerability Check:</h2>
+<ul>
+  {% for port, vuln in result.vuln.items() %}
+    <li>Port {{ port }}: {{ vuln }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
