@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả kiểm thử</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif;
+            margin: 2em; background: #f9f9f9; color: #222; }
+        .vuln {
+            padding: 1em;
+            border-radius: 8px;
+            margin-bottom: 1em;
+            border-left: 6px solid;
+        }
+        .HIGH { background: #ffeaea; border-color: #d00; }
+        .MEDIUM { background: #fff6e6; border-color: #e69500; }
+        .LOW { background: #eaffea; border-color: #0b0; }
+        .title { font-size: 1.3em; margin-bottom: 0.5em; }
+        .label { font-weight: bold; }
+        a { text-decoration: none; color: #007BFF; }
+    </style>
+</head>
+<body>
+    <h2>Báo cáo lỗ hổng</h2>
+    {% if report.vulnerabilities %}
+        {% for v in report.vulnerabilities %}
+            <div class="vuln {{ v.risk | default('LOW') }}">
+                <div class="title">{{ v.type |
+                    default('Lỗ hổng chưa xác định') }}</div>
+                <div><span class="label">Vị trí:</span> {{ v.param |
+                    default('Không rõ') }}</div>
+                <div><span class="label">Mô tả:</span> {{ v.desc |
+                    default('Chưa có mô tả') }}</div>
+                <div><span class="label">Mức độ rủi ro:</span> {{ v.risk |
+                    default('LOW') }}</div>
+                {% if v.url %}
+                    <div><span class="label">URL:</span>
+                        <a href="{{ v.url }}" target="_blank">{{ v.url }}</a></div>
+                {% endif %}
+                {% if v.payload %}
+                    <div><span class="label">Payload:</span>
+                        <code>{{ v.payload }}</code></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Không phát hiện lỗ hổng nào.</p>
+    {% endif %}
+
+    <p><a href="/">Quay lại trang kiểm thử</a></p>
+</body>
+</html>

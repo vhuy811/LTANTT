@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Vulnerability Scanner</title>
+    <style>
+        body { font-family: Arial; margin: 2em; }
+        input, button { padding: 0.5em; margin: 0.5em 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <h2>Web Vulnerability Scanner</h2>
+    <form method="POST">
+        <label>URL cần kiểm thử:</label>
+        <input type="text" name="url" required placeholder="http://example.com"/>
+
+        <label>Chọn công cụ kiểm thử:</label>
+        <input type="checkbox" name="scanner" value="xss" checked> XSS Scanner<br>
+        <input type="checkbox" name="scanner" value="sql" checked> SQL Injection Tester<br>
+        <input type="checkbox" name="scanner" value="csrf" checked> CSRF Detector<br>
+        <input type="checkbox" name="scanner" value="ssrf" checked> SSRF Tester<br>
+
+        <button type="submit">Bắt đầu kiểm thử</button>
+    </form>
+</body>
+</html>
