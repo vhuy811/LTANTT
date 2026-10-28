@@ -1,0 +1,25 @@
+# Lab 6.2.2 - Build Docusaurus va deploy GitLab Pages
+stages:
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  image: node:22
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+pages:
+  stage: deploy
+  script:
+    - mv build/ public/
+  artifacts:
+    paths:
+      - public/
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
